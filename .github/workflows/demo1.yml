@@ -1,8 +1,7 @@
-name: Demo1
+name: Trigger by push
 on:
-  push:
-    branches:
-      - master
+  [push]
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
