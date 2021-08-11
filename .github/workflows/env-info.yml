@@ -1,6 +1,12 @@
 name: Trigger by push
 on:
-  [push]
+  workflow_dispatch:
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Show some standart ENV'
+        # Default value if no value is explicitly provided
+        default: 'env'
 
 jobs:
   Explore-GitHub-Actions:
