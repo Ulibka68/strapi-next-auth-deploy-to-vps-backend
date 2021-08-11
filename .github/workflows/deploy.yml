@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  workflow_dispatch
+#  push:
+#    branches:
+#      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      # Setup key
+      #  -e  Exit immediately if a command exits with a non-zero status.
+      #  -u  Treat unset variables as an error when substituting.
+      - run: |
+              set -eu
+              node -v
+      - name: 'Копирование ключа ssh'
+      - run: mkdir "~/.ssh"
+      - run: echo "${{ secrets.SSH_KEY }}" > ~/.ssh/key
+      - run: chmod 600 ~/.ssh/key
+      - run: cat ~/.ssh/key
+      # Build
+#      - run: npm ci
+#      - run: npm run build
+#      # Deploy
+#      - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
