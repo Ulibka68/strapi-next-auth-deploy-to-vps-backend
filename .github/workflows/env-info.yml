@@ -1,4 +1,4 @@
-name: Trigger by push
+name: Show some standart ENV
 on:
   workflow_dispatch:
     inputs:
