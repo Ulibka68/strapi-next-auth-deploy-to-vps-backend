@@ -1,10 +1,10 @@
 name: Deploy
 
 on:
-  workflow_dispatch
-#  push:
-#    branches:
-#      - master
+#  workflow_dispatch
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -29,6 +29,10 @@ jobs:
       # DATABASE_USERNAME=user
       # DATABASE_PASSWORD=psw
       - name: Сформировать секреты
+#        run: |
+#          envString= "DATABASE_HOST=${{ secrets.DATABASE_HOST }}\nDATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}\nDATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}"
+#          $ echo "${envString@E}" > .env
+
         run: |
           echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" > .env
           echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> .env
@@ -40,7 +44,7 @@ jobs:
       - run: npm run build
       # Deploy
 #      поскольку пользователя удаленного компьютера также имеет смысл сделать рандомным - то я добавил секрет USER
-      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete .env  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/node/strapi/"
+#      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete .env  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/node/strapi/"
       - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete .  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/node/strapi/"
 
 # для тестирования ключа попробуй войти на сервер по ssh с локального компьютера

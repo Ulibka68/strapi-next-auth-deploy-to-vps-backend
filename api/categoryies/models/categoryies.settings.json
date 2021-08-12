@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categoryies",
+  "info": {
+    "name": "Categoryies",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "uid": {
+      "type": "uid"
+    },
+    "Name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "posts": {
+      "via": "categoryy",
+      "collection": "posts"
+    }
+  }
+}
