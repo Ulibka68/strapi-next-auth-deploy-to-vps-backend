@@ -24,15 +24,24 @@ jobs:
       - run: echo "${{ secrets.SSH_KEY }}" > ~/.ssh/key
       - run: chmod 600 ~/.ssh/key
 
+      # Сформировать .env для сервера из секретов
+      # DATABASE_HOST=11.11.1.1
+      # DATABASE_USERNAME=user
+      # DATABASE_PASSWORD=psw
+          - name "Сформировать секреты"
+          run |
+            echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" > env.txt
+            echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" > env.txt
+            echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" > env.txt
+
+
       # Build
 #      - run: npm ci
 #      - run: npm run build
       # Deploy
-#      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./config xud3jc2@178.154.215.117:/var/www/gayrat.xyz/html/
+#      поскольку пользователя удаленного компьютера также имеет смысл сделать рандомным - то я добавил секрет USER
       - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./config  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/html/"
+      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete env.txt  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/html/"
 
-
-# работает!
-# rsync -e "ssh -i ~/.ssh22/id_rsa-private.txt -o StrictHostKeyChecking=no" --archive --compress --delete ~/_prj/strapi/strapi-next-auth-deploy-to-vps/backend/app/config/ xud3jc2@178.154.215.117:/var/www/gayrat.xyz/html/
-
-#  ssh -i ~/.ssh22/id_rsa-private.txt xud3jc2@178.154.215.117
+# для тестирования ключа попробуй войти на сервер по ssh с локального компьютера
+#  ssh -i ~/.ssh22/id_rsa-private.txt root_user@178.154.215.117
