@@ -9,3 +9,5 @@ A quick description of your strapi application
 
 SSH_KEY  
 USER
+
+не запустился
