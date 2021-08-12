@@ -31,8 +31,8 @@ jobs:
       - name: Сформировать секреты
         run: |
           echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" > env.txt
-          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" > env.txt
-          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" > env.txt
+          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> env.txt
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> env.txt
 
 
       # Build
