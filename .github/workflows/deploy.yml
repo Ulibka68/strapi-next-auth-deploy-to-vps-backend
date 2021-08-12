@@ -30,18 +30,18 @@ jobs:
       # DATABASE_PASSWORD=psw
       - name: Сформировать секреты
         run: |
-          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" > env.txt
-          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> env.txt
-          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> env.txt
+          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" > .env
+          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> .env
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
 
 
       # Build
-#      - run: npm ci
-#      - run: npm run build
+      - run: npm ci
+      - run: npm run build
       # Deploy
 #      поскольку пользователя удаленного компьютера также имеет смысл сделать рандомным - то я добавил секрет USER
-      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./config  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/html/"
-      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete env.txt  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/html/"
+      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete .env  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/node/strapi/"
+      - run: rsync -e "ssh -i ~/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete .  "${{ secrets.USER }}@178.154.215.117:/var/www/gayrat.xyz/node/strapi/"
 
 # для тестирования ключа попробуй войти на сервер по ssh с локального компьютера
 #  ssh -i ~/.ssh22/id_rsa-private.txt root_user@178.154.215.117

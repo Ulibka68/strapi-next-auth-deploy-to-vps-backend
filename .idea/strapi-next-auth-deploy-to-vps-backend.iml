@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.cache" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
+    <content url="file://U:/Мой диск/GeekBrains/beget/ssh-yandex" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
