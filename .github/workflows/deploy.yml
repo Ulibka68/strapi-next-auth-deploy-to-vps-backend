@@ -37,6 +37,7 @@ jobs:
           echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" > .env
           echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> .env
           echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo "MYSECRET=${{ secrets.MYSECRET }}" >> .env
 
 
       # Build
