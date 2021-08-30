@@ -11,6 +11,7 @@ SSH_KEY  - секретный ключ для ssh
 USER - пользователь для соединения с удаленным сервером по ssh
 
 Для формирования .env надо установить следующие секреты:
-DATABASE_HOST
-DATABASE_USERNAME
-DATABASE_PASSWORD
+DATABASE_HOST  
+DATABASE_USERNAME  
+DATABASE_PASSWORD  
+USER - пользователь под которым идет логин к VPS - обычно connect идет по ssh c другим пользовательтелем чем root
